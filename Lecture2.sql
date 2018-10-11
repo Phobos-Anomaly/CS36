@@ -110,20 +110,36 @@ SELECT IIF (0>1, 'Greater', 'Lessor') AS comparison;
 
 -- For example we would like to create a new column that shows the economic status of a country
 -- This can be done using GDP >300 billion 'Developed' else 'Developing'
-SELECT Country
-      ,GDP
-      ,Agriculture
-      ,[Service]
-      ,Industry
-      ,Inflation
-      ,Unemployment
-	  ,CASE WHEN GDP > 300000 --If greater than 300 billion
-			THEN 'Developed'
-			WHEN GDP > 200000 
-			THEN 'Developing'
-			ELSE 'Under developed'
-	   END AS economic_status
-FROM dbo.Economy; 
+USE firstDatabase;
+GO
+
+SELECT Name, Mountains, Elevation, Type,
+	   CASE WHEN Elevation > 8000
+			THEN 'Insanely Tall'
+			WHEN Elevation > 7000
+			THEN 'Ridiculously Tall'
+			WHEN Elevation > 6000
+			THEN 'Studpidly Tall'
+			WHEN Elevation > 5000
+			THEN 'Crazy Tall'
+			WHEN Elevation > 4000
+			THEN 'Super Tall'
+			WHEN Elevation > 3000
+			THEN 'Really Tall'
+			WHEN Elevation > 2000
+			THEN 'More Tall'
+			WHEN Elevation > 1000
+			THEN 'Tall'
+			ELSE 'Not Tall'
+	   END AS 'Tallness',
+	   CASE 
+			WHEN Elevation > 2500
+			THEN 'Possible Risk'
+			ELSE 'No Risk'
+	   END AS 'Altitude Sickness'
+	 FROM [Mountain]
+ORDER BY Elevation desc;
+GO
 
 
  /*==============================================================================================
