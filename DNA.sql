@@ -36,4 +36,4 @@ SELECT ((4 + 5) * 6);
 --5
 SELECT *
 FROM dbo.airport
-ORDER BY Province desc;
+ORDER BY [Name] desc, [Province] asc;
