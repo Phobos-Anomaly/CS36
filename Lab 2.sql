@@ -42,28 +42,14 @@ ORDER BY Country;
 -- hint refer to Encompasses table
 --////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
---NOTE! What follows was my exploration of different ways to solve this problem. Ultimately, I was unable to, and I need to turn this assignment in.
---But I will continue working on it, and see if I can't figure it out.
+SELECT TOP(1) l.Name, sum(l.Percentage * c.Population) as number_of_speakers
+FROM Encompasses AS E
+JOIN Country AS C ON E.Country = C.Code 
+JOIN LANGUAGE as l on l.Country = c.Code
+WHERE E.Continent = 'Europe'
+GROUP BY l.Name
+ORDER BY number_of_speakers DESC
 
-/*
-SELECT Country, MAX(Percentage) AS Percentage, 
-	  (SELECT top 1 Name 
-	   FROM Language i 
-	   WHERE i.Country = l.Country 
-	   ORDER by Percentage desc) as Most_Common_Language
-FROM Language l
-WHERE Country IN (SELECT Country
-		  FROM encompasses
-		  WHERE Continent = 'Europe')
-GROUP BY Country
-ORDER BY Percentage desc;
-
-SELECT SUM(Population)
-FROM Country
-WHERE Code IN (SELECT Country
-		 FROM encompasses
-		 WHERE Continent = 'Europe');
-*/
 
 --////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 --5) Display all top 5 Countries that have the largest area of Lakes combined?
@@ -82,4 +68,5 @@ GROUP BY geo_Lake.Country
 ORDER BY Total_Lake_Area desc;
 
 --Since both proceedures render the same results, I've decided to include both.
+
 
